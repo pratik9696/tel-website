@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 
 import { BrandLogo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
+import { ScrollButton } from "@/components/ui/scroll-button";
 
 const links = [
   { label: "Features", href: "#features" },
@@ -30,15 +33,27 @@ export function Footer() {
           </div>
 
           <div className="grid grid-cols-2 gap-x-10 gap-y-3 text-sm md:grid-cols-3">
-            {links.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map((l) =>
+              l.href.startsWith("#") && l.href.length > 1 ? (
+                <ScrollButton
+                  key={l.label}
+                  targetId={l.href.replace(/^#/, "")}
+                  variant="ghost"
+                  size="sm"
+                  className="h-auto justify-start rounded-lg px-2 py-1 text-zinc-600 hover:bg-transparent hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-transparent dark:hover:text-white"
+                >
+                  {l.label}
+                </ScrollButton>
+              ) : (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  className="rounded-lg px-2 py-1 text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+                >
+                  {l.label}
+                </a>
+              ),
+            )}
           </div>
 
           <div className="text-sm">

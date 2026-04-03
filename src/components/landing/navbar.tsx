@@ -1,15 +1,17 @@
+"use client";
+
 import Link from "next/link";
 
 import { cn } from "@/lib/cn";
 import { BrandLogo } from "@/components/brand/logo";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { ScrollButton } from "@/components/ui/scroll-button";
 
 const navItems = [
-  { href: "#problem", label: "Problem" },
-  { href: "#solution", label: "Solution" },
-  { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How it works" },
+  { id: "problem", label: "Problem" },
+  { id: "solution", label: "Solution" },
+  { id: "features", label: "Features" },
+  { id: "how-it-works", label: "How it works" },
 ];
 
 export function Navbar({ className }: { className?: string }) {
@@ -31,23 +33,29 @@ export function Navbar({ className }: { className?: string }) {
 
         <nav className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => {
+                const el = document.getElementById(item.id);
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                const { pathname, search } = window.location;
+                window.history.replaceState(null, "", `${pathname}${search}`);
+              }}
               className="text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" href="#features">
+          <ScrollButton variant="ghost" size="sm" targetId="features">
             Explore
-          </Button>
-          <Button size="sm" href="#cta">
+          </ScrollButton>
+          <ScrollButton size="sm" targetId="cta">
             Get Demo
-          </Button>
+          </ScrollButton>
         </div>
       </Container>
     </header>

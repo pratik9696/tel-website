@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { ScrollButton } from "@/components/ui/scroll-button";
 import { cn } from "@/lib/cn";
 
 function Card({
@@ -61,10 +62,10 @@ export function HeroSection() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button href="#cta">Get Demo</Button>
-              <Button variant="secondary" href="#features">
+              <ScrollButton targetId="cta">Get Demo</ScrollButton>
+              <ScrollButton variant="secondary" targetId="features">
                 Start Free
-              </Button>
+              </ScrollButton>
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
@@ -412,13 +413,13 @@ export function CTASection() {
               >
                 Get Demo
               </Button>
-              <Button
-                href="#features"
+              <ScrollButton
+                targetId="features"
                 variant="ghost"
                 className="bg-white/0 text-white hover:bg-white/10"
               >
                 Start Free
-              </Button>
+              </ScrollButton>
             </div>
             <div className="mt-6 text-xs text-white/80">
               Talk to us for a plan that fits your factory.
